@@ -1,13 +1,13 @@
 import os 
 from flask import Flask, render_template, request
-from twitoff.predict import predict_user
+from .predict import predict_user
 from .twitter import add_or_update_user, vectorize_tweets
 from .models import DB, User, Tweet
 
 
 def create_app():
     app = Flask(__name__)
-    app_title = "TwitOff DS38"
+    app_title = "TwitOff"
 
     # Database config
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
@@ -37,14 +37,14 @@ def create_app():
     
     @app.route('/populate')
     def populate():
-        user1 = User(id=1, username='jon')
+        user1 = User(id=1, username='Jon T.')
         DB.session.add(user1)
-        user2 = User(id=2, username='alyssa')
+        user2 = User(id=2, username='Alyssa C.')
         DB.session.add(user2)
-        tweet_text = 'This is my tweet'
+        tweet_text = 'This is a sample Tweet'
         tweet_vector = vectorize_tweets(tweet_text)
         tweet1 = Tweet(id=1, text=tweet_text, vector=tweet_vector, user=user1)
-        tweet_text = 'Hello World'
+        tweet_text = 'Hello Everybody!'
         tweet_vector = vectorize_tweets(tweet_text)
         tweet2 = Tweet(id=2, text=tweet_text, vector=tweet_vector, user=user2)
         DB.session.add(tweet2)

@@ -7,7 +7,7 @@ DB = SQLAlchemy()
 class User(DB.Model):
     id = DB.Column(DB.BigInteger, primary_key=True)
     username = DB.Column(DB.String, nullable=False)
-    # newest_tweet_id = DB.Column(DB.BigInteger)
+    newest_tweet_id = DB.Column(DB.BigInteger)
 
     def __repr__(self):
         return f"<User: {self.username}>"

@@ -29,14 +29,17 @@ def add_or_update_user(username):
     try:
         twitter_user = twitter.get_user(screen_name=username)
         # Does this user already exist in the db?
-        db_user = User.query.get(username=username)
+        db_user  = User.query.get(twitter_user.id)
         if not db_user:
             db_user = User(id=twitter_user.id, username=username)
             DB.session.add(db_user)
         
         # Get the user's tweets
         tweets = twitter_user.timeline(
-            count=200, exclude_replies=True, include_rts=False, tweet_mode='extended'
+            count=200,
+            exclude_replies=True,
+            include_rts=False,
+            tweet_mode='extended'
         )
 
         # Add each tweet to the db
