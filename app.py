@@ -1,8 +1,8 @@
 import os 
 from flask import Flask, render_template, request
-from .predict import predict_user
-from .twitter import add_or_update_user, vectorize_tweets
-from .models import DB, User, Tweet
+from predict import predict_user
+from twitter import add_or_update_user, vectorize_tweets
+from models import DB, User, Tweet
 
 
 def create_app():
